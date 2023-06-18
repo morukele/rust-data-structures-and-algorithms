@@ -1,16 +1,29 @@
 use rand::prelude::*;
 
 pub fn max_pairwise_product_faster(a: &Vec<i64>) -> i64 {
-    let (mut largest, mut second_largest) = (i64::MIN, i64::MIN);
-    for &i in a.iter() {
-        if i > largest {
-            (largest, second_largest) = (i, largest);
-        } else if i > second_largest {
-            second_largest = i;
+    let first = a.get(0).copied().unwrap();
+    let second = a.get(1).copied().unwrap();
+
+    let (mut first, mut second) = if first > second {
+        (first, second)
+    } else {
+        (second, first)
+    };
+
+    for &v in &a[2..] {
+        if v <= second {
+            continue;
         }
+
+        if v <= first {
+            second = v;
+            continue;
+        }
+
+        second = first;
+        first = v;
     }
-    println!("largest: {}, second_largest: {}", largest, second_largest);
-    largest * second_largest
+    first * second
 }
 
 pub fn max_pairwise_product_naive(a: &Vec<i64>) -> i64 {
