@@ -1,5 +1,6 @@
-use puzzle::max_pairwise::stress_test;
+use puzzle::divisor_and_multiple::least_common_multiple;
 
 fn main() {
-    stress_test(5, 10);
+    let res = least_common_multiple(28851538, 1183019);
+    println!("output: {:?}", res)
 }

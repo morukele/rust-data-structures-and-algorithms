@@ -1,6 +1,6 @@
 use rand::prelude::*;
 
-pub fn max_pairwise_product_faster(a: &Vec<i64>) -> i64 {
+pub fn max_pairwise_product_faster(a: &[i64]) -> i64 {
     let first = a.get(0).copied().unwrap();
     let second = a.get(1).copied().unwrap();
 
@@ -26,7 +26,7 @@ pub fn max_pairwise_product_faster(a: &Vec<i64>) -> i64 {
     first * second
 }
 
-pub fn max_pairwise_product_naive(a: &Vec<i64>) -> i64 {
+pub fn max_pairwise_product_naive(a: &[i64]) -> i64 {
     let mut product: i64 = 0;
     for i in 0..a.len() {
         for j in i + 1..a.len() {
@@ -40,7 +40,15 @@ pub fn max_pairwise_product_naive(a: &Vec<i64>) -> i64 {
     product
 }
 
-pub fn max_pairwise_product_fast(a: &Vec<i64>) -> i64 {
+pub fn max_pairwise_product_by_sorting(a: &[i64]) -> i64 {
+    let n = a.len() - 1;
+    let mut a = a.to_vec();
+    a.sort();
+
+    a[n - 1] * a[n]
+}
+
+pub fn max_pairwise_product_fast(a: &[i64]) -> i64 {
     let n = a.len() - 1; // this is to ensure zero based indexing
     let mut a: Vec<i64> = a.to_vec();
     let mut idx = 0;
@@ -84,7 +92,7 @@ pub fn stress_test(n: i64, m: i64) {
 
         println!("input array: {:?}", array);
         let res_1 = max_pairwise_product_naive(&array);
-        let res_2 = max_pairwise_product_faster(&array);
+        let res_2 = max_pairwise_product_by_sorting(&array);
 
         if res_1 == res_2 {
             println!("OK")
