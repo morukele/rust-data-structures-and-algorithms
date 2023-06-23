@@ -1,3 +1,3 @@
 pub mod divisor_and_multiple;
-pub mod fib;
+pub mod fibonacci;
 pub mod max_pairwise;

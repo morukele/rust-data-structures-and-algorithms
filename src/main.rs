@@ -1,6 +1,6 @@
-use puzzle::divisor_and_multiple::least_common_multiple;
+use puzzle::fibonacci::n_th_fibonacci_number_modolo_m;
 
 fn main() {
-    let res = least_common_multiple(28851538, 1183019);
+    let res = n_th_fibonacci_number_modolo_m(2816213588, 30524);
     println!("output: {:?}", res)
 }

@@ -1,4 +1,4 @@
-pub fn greatest_common_divisor(a: u64, b: u64) -> u64 {
+pub fn greatest_common_divisor(a: i64, b: i64) -> i64 {
     let mut a = a;
     let mut b = b;
 
@@ -21,6 +21,6 @@ pub fn greatest_common_divisor(a: u64, b: u64) -> u64 {
     }
 }
 
-pub fn least_common_multiple(a: u64, b: u64) -> u64 {
+pub fn least_common_multiple(a: i64, b: i64) -> i64 {
     (a * b) / greatest_common_divisor(a, b)
 }
