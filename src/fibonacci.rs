@@ -1,8 +1,8 @@
-pub fn n_th_fibonacci_number(n: i64) -> i64 {
+pub fn nth_fibonacci_number(n: i64) -> i64 {
     if n <= 1 {
         return n;
     }
-    n_th_fibonacci_number(n - 1) + n_th_fibonacci_number(n - 2)
+    nth_fibonacci_number(n - 1) + nth_fibonacci_number(n - 2)
 }
 
 pub fn fibonacci_last_digit(n: i64) -> i64 {
@@ -21,12 +21,20 @@ pub fn fibonacci_last_digit(n: i64) -> i64 {
     f.last().unwrap().to_owned()
 }
 
-pub fn n_th_fibonacci_number_modolo_m(n: i64, m: i64) -> i64 {
-    // Initalize the first and second number of the Fib sequence
+pub fn nth_fibonacci_number_modolo_m(n: i64, m: i64) -> i64 {
+    let (length, pisano_sequence) = get_pisano_period_and_length(m);
+
+    println!("pisano period lenght: {}", length);
+
+    let remainder = n % length;
+    pisano_sequence.get(remainder as usize).unwrap().to_owned()
+}
+
+fn get_pisano_period_and_length(m: i64) -> (i64, Vec<i64>) {
     let mut a = 0;
     let mut b = 1;
-    let mut period: i64 = 0;
-    let mut pisano_sequence = vec![a, b];
+    let mut lenght = 0;
+    let mut pisano_sequence: Vec<i64> = vec![a, b];
 
     // Iterating through all the fib numbers to get the sequence
     for _i in 0..(m * m) + 1 {
@@ -43,11 +51,22 @@ pub fn n_th_fibonacci_number_modolo_m(n: i64, m: i64) -> i64 {
             // This is a less eligant way to do it.
             pisano_sequence.pop();
             pisano_sequence.pop();
-            period = pisano_sequence.len() as i64;
+            lenght = pisano_sequence.len() as i64;
             break;
         }
     }
 
-    let remainder = n % period;
-    pisano_sequence.get(remainder as usize).unwrap().to_owned()
+    (lenght, pisano_sequence)
+}
+
+pub fn last_digit_of_the_sum_of_nth_fibonacci_number(n: i64) -> i64 {
+    if n < 2 {
+        return n;
+    }
+
+    // get the pisano period of modulus 10
+    // we use 10 because we are interested in the last digit
+    let (length, period) = get_pisano_period_and_length(10);
+    println!("{} and {:?}", length, period);
+    todo!()
 }

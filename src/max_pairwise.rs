@@ -1,7 +1,7 @@
 use rand::prelude::*;
 
 pub fn max_pairwise_product_faster(a: &[i64]) -> i64 {
-    let first = a.get(0).copied().unwrap();
+    let first = a.first().copied().unwrap();
     let second = a.get(1).copied().unwrap();
 
     let (mut first, mut second) = if first > second {
@@ -85,10 +85,10 @@ pub fn stress_test(n: i64, m: i64) {
         let mut rng = thread_rng();
         let capacity = rng.gen_range(2..=n) as usize;
         let mut array: Vec<i64> = vec![0; capacity];
-        for i in 0..capacity {
+        (0..capacity).for_each(|i| {
             let num = rng.gen_range(0..=m);
             array[i] = num;
-        }
+        });
 
         println!("input array: {:?}", array);
         let res_1 = max_pairwise_product_naive(&array);
