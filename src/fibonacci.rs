@@ -10,15 +10,15 @@ pub fn fibonacci_last_digit(n: i64) -> i64 {
     // there should be 4 elements in the array.
     // essentially, the limit should be n+1
     let n = (n + 1) as usize;
-    let mut f: Vec<i64> = vec![0; n];
-    f[0] = 0;
-    f[1] = 1;
+    let mut fib_numbers: Vec<i64> = vec![0; n];
+    fib_numbers[0] = 0;
+    fib_numbers[1] = 1;
 
     for i in 2..=n - 1 {
-        f[i] = (f[i - 1] + f[i - 2]) % 10;
+        fib_numbers[i] = (fib_numbers[i - 1] + fib_numbers[i - 2]) % 10;
     }
 
-    f.last().unwrap().to_owned()
+    fib_numbers.last().unwrap().to_owned()
 }
 
 pub fn nth_fibonacci_number_modolo_m(n: i64, m: i64) -> i64 {
@@ -64,9 +64,49 @@ pub fn last_digit_of_the_sum_of_nth_fibonacci_number(n: i64) -> i64 {
         return n;
     }
 
-    // get the pisano period of modulus 10
-    // we use 10 because we are interested in the last digit
-    let (length, period) = get_pisano_period_and_length(10);
-    println!("{} and {:?}", length, period);
-    todo!()
+    // the pisano period of mod 10 is 60
+    let n = ((n + 2) % 60) as usize;
+    let mut fib = vec![0; n + 1];
+    fib[0] = 0;
+    fib[1] = 1;
+
+    for i in 2..=n {
+        fib[i] = (fib[i - 1] % 10 + fib[i - 2] % 10) % 10;
+    }
+
+    if fib[n] == 0 {
+        return 9;
+    }
+
+    fib[n] % 10 - 1
+}
+
+pub fn last_digit_of_the_partial_sum_of_nth_fibonacci_number(m: i64, n: i64) -> i64 {
+    if m > n {
+        return 0;
+    }
+
+    // Compute the first 60 fibonacci numbers
+    let mut fib: Vec<i64> = Vec::new();
+    fib.push(0);
+    fib.push(1);
+
+    for i in 2..=60 {
+        fib.push(fib[i - 1] + fib[i - 2]);
+    }
+
+    let m = m % 60;
+    let mut n = n % 60;
+
+    // make sure n is greater than m
+    if n < m {
+        n += 60;
+    }
+
+    let mut sum = 0;
+    for j in m..n + 1 {
+        sum += fib[(j % 60) as usize];
+    }
+
+    sum % 10
 }
