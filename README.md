@@ -1,26 +1,31 @@
 # Data Structure and Algorithms
 
-This repo hold the exercies of my data structure and algorithm course I am following. All algorithms are stressed tested to ensure that they do not break or give wrong solutions.
+This repo hold the exercies of my data structure and algorithm course I am following.
+
+*All algorithms are stressed tested to ensure that they do not break or give wrong solutions.*
 
 ## Exercieses
 
-- Max Pairwise Multiplication
+### Max Pairwise Multiplication
 
-  - Naive solution (3n)
-  - Fast solution (2n + 2)
-  - Faster solution (2.5n)
+1. Divisor and multiple
+2. Greatest common division
+3. Least common multiple
 
-- Divisor and Multiple
+### Fibonacci Numbers
+
+1. nth Fibonacci number (recursive)
+2. Last digit of the nth Fibonacci number (modulo 10)
+3. nth Fibonacci number modulo m
+4. Pisano period and length
+5. Last digit of the sum of the nth Fibonacci number
+6. Last digit of the partial sum of the nth Fibonacci number
   
-  - Greatest common division
-  - Least common multiple
+### Gready Algorithms
 
-- Fibonacci Numbers
-
-  - nth Fibonacci number (recursive)
-  - Last digit of the nth Fibonacci number (modulo 10)
-  - nth Fibonacci number modulo m
-  - Pisano period and length
-  - Last digit of the sum of the nth Fibonacci number
-  - Last digit of the partial sum of the nth Fibonacci number
-  
+1. Money change problem
+2. Maximum value of the loot
+3. Maximum advertisment Revenue
+4. Collecting signatures
+5. Maximum number of prizes
+6. Maximum salary
