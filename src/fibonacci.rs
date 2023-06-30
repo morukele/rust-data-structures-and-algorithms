@@ -21,7 +21,7 @@ pub fn fibonacci_last_digit(n: i64) -> i64 {
     fib_numbers.last().unwrap().to_owned()
 }
 
-pub fn nth_fibonacci_number_modolo_m(n: i64, m: i64) -> i64 {
+pub fn nth_fibonacci_number_modulo_m(n: i64, m: i64) -> i64 {
     let (length, pisano_sequence) = get_pisano_period_and_length(m);
 
     println!("pisano period lenght: {}", length);
