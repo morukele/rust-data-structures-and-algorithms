@@ -42,25 +42,41 @@ pub fn max_pairwise_product_faster(numbers: &[i64]) -> i64 {
     first_largest_number * second_largest_number
 }
 
+/// A function to return the max pairwise product of an array of integers.
+/// The function takes in an array of integers and returns the maximum product possible between two integers.
+/// Time complexity -> O(n^2)
 pub fn max_pairwise_product_naive(numbers: &[i64]) -> i64 {
-    let mut product: i64 = 0;
+    // Initialize a mutable product variable at zero
+    let mut max_product: i64 = 0;
+
+    // Iterate through the numbers starting from the first number
     for i in 0..numbers.len() {
+        // Iterate through the numbers starting from i+1
         for j in i + 1..numbers.len() {
+            // Compute the product of the two numbers
             let res = numbers[i] * numbers[j];
-            if product < res {
-                product = res;
+            // Check if the result is less than the current max product
+            if max_product < res {
+                // Assign the result to the max product
+                max_product = res;
             }
         }
     }
 
-    product
+    max_product
 }
 
+/// A function to return the max pairwise product of an array of integers using the sort function.
+/// Time complexity -> should be equal to the time complexity of the sort fuction.
 pub fn max_pairwise_product_by_sorting(numbers: &[i64]) -> i64 {
+    // Get the max index of the array
     let n = numbers.len() - 1;
+    // Convert the numbers array to a vector
     let mut a = numbers.to_vec();
+    // Sort the vector in ascending order
     a.sort();
 
+    // Multiply the last and second to last number in the array.
     a[n - 1] * a[n]
 }
 
@@ -85,38 +101,6 @@ pub fn max_pairwise_product_fast(numbers: &[i64]) -> i64 {
     a.swap(idx, n - 1);
 
     a[n - 1] * a[n]
-}
-
-pub fn generate_large_vector(limit: i64) -> Vec<i64> {
-    let mut res: Vec<i64> = Vec::new();
-    for i in 1..limit + 1 {
-        res.push(i);
-    }
-
-    res
-}
-
-pub fn stress_test(n: i64, m: i64) {
-    loop {
-        let mut rng = thread_rng();
-        let capacity = rng.gen_range(2..=n) as usize;
-        let mut array: Vec<i64> = vec![0; capacity];
-        (0..capacity).for_each(|i| {
-            let num = rng.gen_range(0..=m);
-            array[i] = num;
-        });
-
-        println!("input array: {:?}", array);
-        let res_1 = max_pairwise_product_naive(&array);
-        let res_2 = max_pairwise_product_by_sorting(&array);
-
-        if res_1 == res_2 {
-            println!("OK")
-        } else {
-            println!("Wrong answer -> naive: {}, fast: {}", res_1, res_2);
-            break;
-        }
-    }
 }
 
 #[cfg(test)]
