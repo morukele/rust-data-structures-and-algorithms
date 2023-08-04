@@ -3,7 +3,7 @@ pub fn greatest_common_divisor(a: i64, b: i64) -> i64 {
     let mut b = b;
 
     // This block ensures that a will always be greater than b
-    // This is prefered to assert because it does not panic
+    // This is preferred to assert because it does not panic
     if b > a {
         std::mem::swap(&mut a, &mut b);
     }

@@ -97,7 +97,7 @@ pub fn stress_test(n: i64, m: i64) {
         if res_1 == res_2 {
             println!("OK")
         } else {
-            println!("Wrong anwser -> naive: {}, fast: {}", res_1, res_2);
+            println!("Wrong answer -> naive: {}, fast: {}", res_1, res_2);
             break;
         }
     }

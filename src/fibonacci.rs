@@ -24,7 +24,7 @@ pub fn fibonacci_last_digit(n: i64) -> i64 {
 pub fn nth_fibonacci_number_modulo_m(n: i64, m: i64) -> i64 {
     let (length, pisano_sequence) = get_pisano_period_and_length(m);
 
-    println!("pisano period lenght: {}", length);
+    println!("pisano period length: {}", length);
 
     let remainder = n % length;
     pisano_sequence.get(remainder as usize).unwrap().to_owned()
@@ -48,7 +48,7 @@ fn get_pisano_period_and_length(m: i64) -> (i64, Vec<i64>) {
 
         if a == 0 && b == 1 {
             // Remove the last two elements from the sequence
-            // This is a less eligant way to do it.
+            // This is a less elegant way to do it.
             pisano_sequence.pop();
             pisano_sequence.pop();
             lenght = pisano_sequence.len() as i64;
