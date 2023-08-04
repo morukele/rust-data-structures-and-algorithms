@@ -1,36 +1,52 @@
 use rand::prelude::*;
 
-pub fn max_pairwise_product_faster(a: &[i64]) -> i64 {
-    let first = a.first().copied().unwrap();
-    let second = a.get(1).copied().unwrap();
+/// A function to find the max pairwise product in an array of integers.
+/// The function taken in an array (vector) of intergers,
+/// and returns the maximum product of two integers in the array.
+/// Time Complexity -> O(n)
+pub fn max_pairwise_product_faster(numbers: &[i64]) -> i64 {
+    // Getting the first and second numbers of the array
+    let first_largest_number = numbers.first().copied().unwrap();
+    let second_largest_number = numbers.get(1).copied().unwrap();
 
-    let (mut first, mut second) = if first > second {
-        (first, second)
-    } else {
-        (second, first)
-    };
+    // Swap between the first and second based on which is larger
+    let (mut first_largest_number, mut second_largest_number) =
+        if first_largest_number > second_largest_number {
+            (first_largest_number, second_largest_number)
+        } else {
+            (second_largest_number, first_largest_number)
+        };
 
-    for &v in &a[2..] {
-        if v <= second {
+    // Iterate throught the remaining numbers in the array
+    for &current_number in &numbers[2..] {
+        // If the number is less than the second largest number, do nothing.
+        if current_number <= second_largest_number {
             continue;
         }
 
-        if v <= first {
-            second = v;
+        // If the number is less than the first largest number,
+        // we assume that it is larger than the second, so we assign it to the second largest number.
+        // This assumption is then verified in the first check.
+        if current_number <= first_largest_number {
+            second_largest_number = current_number;
             continue;
         }
 
-        second = first;
-        first = v;
+        // if the number doesn't match the above conditions,
+        // the number is the largest number.
+        // We assign the first largest number to the second largest number,
+        // and then the current number to the first largest number.
+        second_largest_number = first_largest_number;
+        first_largest_number = current_number;
     }
-    first * second
+    first_largest_number * second_largest_number
 }
 
-pub fn max_pairwise_product_naive(a: &[i64]) -> i64 {
+pub fn max_pairwise_product_naive(numbers: &[i64]) -> i64 {
     let mut product: i64 = 0;
-    for i in 0..a.len() {
-        for j in i + 1..a.len() {
-            let res = a[i] * a[j];
+    for i in 0..numbers.len() {
+        for j in i + 1..numbers.len() {
+            let res = numbers[i] * numbers[j];
             if product < res {
                 product = res;
             }
@@ -40,17 +56,17 @@ pub fn max_pairwise_product_naive(a: &[i64]) -> i64 {
     product
 }
 
-pub fn max_pairwise_product_by_sorting(a: &[i64]) -> i64 {
-    let n = a.len() - 1;
-    let mut a = a.to_vec();
+pub fn max_pairwise_product_by_sorting(numbers: &[i64]) -> i64 {
+    let n = numbers.len() - 1;
+    let mut a = numbers.to_vec();
     a.sort();
 
     a[n - 1] * a[n]
 }
 
-pub fn max_pairwise_product_fast(a: &[i64]) -> i64 {
-    let n = a.len() - 1; // this is to ensure zero based indexing
-    let mut a: Vec<i64> = a.to_vec();
+pub fn max_pairwise_product_fast(numbers: &[i64]) -> i64 {
+    let n = numbers.len() - 1; // this is to ensure zero based indexing
+    let mut a: Vec<i64> = numbers.to_vec();
     let mut idx = 0;
 
     for i in 0..n {
@@ -101,4 +117,12 @@ pub fn stress_test(n: i64, m: i64) {
             break;
         }
     }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::max_pairwise_product_by_sorting;
+    use super::max_pairwise_product_fast;
+    use super::max_pairwise_product_faster;
+    use super::max_pairwise_product_naive;
 }
