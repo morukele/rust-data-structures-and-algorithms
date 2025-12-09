@@ -25,7 +25,7 @@ fn merge_sort(arr: &mut [i32]) {
     let mid = n / 2;
 
     // handle base case
-    if (n < 2) {
+    if n < 2 {
         return; // already sorted
     }
 
@@ -58,12 +58,12 @@ fn merge_in_place(left: &mut [i32], right: &mut [i32], temp: &mut Vec<i32>) {
     }
 
     // check for remaining
-    while (i < left.len()) {
+    while i < left.len() {
         temp.push(left[i]);
         i += 1;
     }
 
-    while (j < right.len()) {
+    while j < right.len() {
         temp.push(right[j]);
         j += 1;
     }
