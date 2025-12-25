@@ -1,4 +1,4 @@
-fn navigate_and_compute_area(moves: &str) -> i32 {
+pub fn navigate_and_compute_area(moves: &str) -> i32 {
     let mut path: Vec<(i32, i32)> = Vec::new();
     let (mut x, mut y) = (0, 0);
     path.push((x, y));

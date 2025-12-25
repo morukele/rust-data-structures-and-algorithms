@@ -4,7 +4,7 @@
  * Your task is to find the number of connected components in the graph using the DFS algorithm.
  * A connected component is a group of nodes where each node is reachable from any other node in the same group.
  */
-fn count_components(n: usize, edges: Vec<Vec<usize>>) -> i32 {
+pub fn count_components(n: usize, edges: Vec<Vec<usize>>) -> i32 {
     // Step 1: build the adjacency list
     let mut graph = vec![Vec::new(); n];
     for edge in edges {
@@ -30,7 +30,7 @@ fn count_components(n: usize, edges: Vec<Vec<usize>>) -> i32 {
     components
 }
 
-fn dfs(node: usize, graph: &Vec<Vec<usize>>, visited: &mut Vec<bool>) {
+pub fn dfs(node: usize, graph: &Vec<Vec<usize>>, visited: &mut Vec<bool>) {
     visited[node] = true; // set node as visited
     for &neigbhour in &graph[node] {
         // check the neigbhours of the node
