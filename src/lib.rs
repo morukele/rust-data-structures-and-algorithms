@@ -5,5 +5,7 @@ pub mod dfs;
 pub mod hanoi;
 pub mod matrix;
 pub mod path_navigation;
+pub mod singly_linked_list;
 pub mod sort;
 pub mod strings;
+pub mod trees_and_graphs;
